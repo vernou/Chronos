@@ -9,8 +9,12 @@ init:
 clone_depth: 1
 before_build:
   - cmd: dotnet --version
+  - cmd: choco install opencover.portable
+  - cmd: choco install codecov
 build_script:
   - cmd: dotnet build ./src
 test_script:
   - cmd: dotnet test .\src\Chronos.Core.Test\
+  - cmd: OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test ./src/Chronos.Core.Test" -output:".\Chronos_coverage.xml" -oldstyle
+  - cmd: codecov -f "Chronos_coverage.xml" -t fb9e41c6-68f1-4ce0-88ab-efd3a18a6572
 deploy: off
