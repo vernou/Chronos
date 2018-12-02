@@ -1,0 +1,16 @@
+version: '0.1.{build}'
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+clone_depth: 1
+before_build:
+  - cmd: dotnet --version
+build_script:
+  - cmd: dotnet build ./src
+test_script:
+  - cmd: dotnet test .\src\Chronos.Core.Test\
+deploy: off
