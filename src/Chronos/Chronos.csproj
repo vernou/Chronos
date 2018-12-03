@@ -20,6 +20,12 @@
     <ProjectReference Include="..\Chronos.Core\Chronos.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Issue.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
   <Target Name="EnsureNpmRestored" BeforeTargets="CoreBuild" Condition="!Exists('node_modules')">
     <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
     <Exec Command="npm install" />

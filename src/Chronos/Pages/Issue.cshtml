@@ -1,0 +1,12 @@
+﻿@page "/issue"
+<h1>Issue</h1>
+<p>Just one issue</p>
+<div>
+    <input placeholder="Issue key..." bind="@Key" />
+    <br />
+    <label>@Label</label>
+</div>
+@functions {
+    string Key { get; set; }
+    string Label => Key;
+}
