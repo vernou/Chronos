@@ -8,4 +8,4 @@ Experimental Blazor/Electron application to time tracking in Jira tracker.
 
 ## License
 
-Chronos is licensed under the [MIT license](LICENSE.TXT).
+Chronos is licensed under the [MIT license](LICENSE).
