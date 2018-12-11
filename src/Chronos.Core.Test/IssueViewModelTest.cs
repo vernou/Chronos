@@ -40,5 +40,21 @@ namespace Chronos.Core.Test
             var vm = new IssueViewModel(new ChronometerFake { Elapsed = new TimeSpan(1, 2, 3) });
             Assert.Equal("01h02m03s", vm.ElapsedLabel);
         }
+
+        [Fact]
+        public void StartStopButtonOnClickWhenNotRunning()
+        {
+            var vm = new IssueViewModel(new ChronometerFake { Running = false });
+            vm.StartStopButtonOnClick();
+            Assert.True(vm.Running);
+        }
+
+        [Fact]
+        public void StartStopButtonOnClickWhenRunning()
+        {
+            var vm = new IssueViewModel(new ChronometerFake { Running = true });
+            vm.StartStopButtonOnClick();
+            Assert.False(vm.Running);
+        }
     }
 }
