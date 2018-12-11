@@ -1,35 +1,23 @@
 ﻿@page "/issue"
-@using System.Diagnostics
 @using System.Timers
+@using Chronos.Core
 
 <h1>Issue</h1>
 <p>Just one issue</p>
 <div>
-    <input placeholder="Issue key..." bind="@Key" />
-    <button onclick="@StartStopButtonOnClick">Start/Stop</button>
-    <label>@ElapsedTimeLabel</label>
+    <input placeholder="Issue key..." bind="@_vm.Key" />
+    <button onclick="@_vm.StartStopButtonOnClick">Start/Stop</button>
+    <label>@_vm.ElapsedLabel</label>
     <br />
-    <label>@Label</label>
+    <label>@_vm.Label</label>
 </div>
 @functions {
-    private readonly Stopwatch _stopwatch = new Stopwatch();
     readonly Timer _timer = new Timer(1000);
-    string Key { get; set; }
-    string Label => Key;
-    string ElapsedTimeLabel => Display(_stopwatch.Elapsed);
-    string Display(TimeSpan elapsed) => $"{elapsed.Hours}h{elapsed.Minutes}m{elapsed.Seconds}s";
+    readonly IssueViewModel _vm = new IssueViewModel(new ChronometerSystem());
 
     protected override void OnInit()
     {
         _timer.Elapsed += (sender, args) => StateHasChanged();
         _timer.Start();
-    }
-
-    void StartStopButtonOnClick()
-    {
-        if (_stopwatch.IsRunning)
-            _stopwatch.Stop();
-        else
-            _stopwatch.Start();
     }
 }
